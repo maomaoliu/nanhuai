@@ -10,7 +10,7 @@ class BaseControllerTest < ActionController::TestCase
   test "should handle nil parameter" do
     get :valid
     assert_response :success
-    assert_template :valid
+    assert_template :message
     assert_template layout: false
     assert_equal '', assigns[:result]
   end
@@ -18,7 +18,7 @@ class BaseControllerTest < ActionController::TestCase
   test "should handle normal verify request" do
     get :valid, :signature => signature, :timestamp => timestamp, :nonce => nonce, :echostr => echostr
     assert_response :success
-    assert_template :valid
+    assert_template :message
     assert_template layout: false
     assert_equal echostr, assigns[:result]
   end
