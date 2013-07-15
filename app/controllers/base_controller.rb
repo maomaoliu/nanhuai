@@ -2,19 +2,11 @@ class BaseController < ApplicationController
 
   def valid
     echostr = params['echostr'] || ''
-
-    @result = verify ? echostr : ''
-    render :file => 'valid', :layout => false
+    render text: (verify ? echostr : '')
   end
 
   def receive
-    if verify
-      @result = MessageHandler.handle(XMLMessage.new(request.raw_post))
-    else
-      @result = ''
-    end
-
-    render :file => 'message', :layout => false
+    render text: (verify ? MessageHandler.handle(XMLMessage.new(request.raw_post)) : '')
   end
 
   private
